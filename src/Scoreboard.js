@@ -46,9 +46,10 @@ class Scoreboard extends Component {
     this.childrenLength = this.gameScores.children.length;
     this.gameScoreIndex = 0;
 
-    // Update game scores inner container for slider
+    // Update slider inner container width
     this.gameScores.style.width = 280 * this.childrenLength + 'px';
 
+    // Set up event listeners for slider buttons
     this.prevBtn.addEventListener('click', evt => {
       if(this.gameScoreIndex > 0){
         this.gameScoreIndex--;
