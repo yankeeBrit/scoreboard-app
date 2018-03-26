@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import GameScore from "./GameScore.js";
+import GameScore from './GameScore.js';
+import utils from './utilities.js';
 
 class GameScores extends Component {
   render() {
@@ -40,13 +41,13 @@ class GameScores extends Component {
           const date = new Date(game.status.detail);
 
           // If game starts on a later date, add date to game score header
-          let laterDate = this.compareDates(date, eventsDate);
+          let laterDate = utils.compareDates(date, eventsDate);
 
           if(laterDate){
-            gameStatus = this.getDay(date);
-            gameStatusDetail = this.getTime(date);
+            gameStatus = utils.getDay(date);
+            gameStatusDetail = utils.getTime(date);
           }else{
-            gameStatus = this.getTime(date);
+            gameStatus = utils.getTime(date);
           }
 
           awayTeamScore = game.competitors[1].team.record.summary;
@@ -71,66 +72,6 @@ class GameScores extends Component {
     return (
       <div className='scoreboard__scores-inner'>{scores}</div>
     )
-  }
-
-  getDay(date) {
-    const days = ['Sunday',
-                  'Monday',
-                  'Tuesday',
-                  'Wednesday',
-                  'Thursday',
-                  'Friday',
-                  'Saturday'];
-
-    return days[date.getDay()];
-  }
-
-  getMonth(date) {
-    const months = ['January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                    'August',
-                    'September',
-                    'October',
-                    'November',
-                    'December'];
-
-    return months[date.getMonth()];
-  }
-
-  getTime(date) {
-    const hours = date.getHours();
-
-    let minutes = date.getMinutes(),
-        period = 'AM',
-        hour = hours;
-
-    //convert to 12 hour clock
-    if(hour >= 12) {
-      hour = hours - 12;
-      period = 'PM';
-    }
-
-    if(hour === 0) hour = 12;
-
-    minutes = minutes < 10 ? ('0' + minutes) : minutes;
-
-    return hour + ':' + minutes + period;
-  }
-
-  compareDates(date1, date2) {
-    const d1 = new Date(date1.getFullYear(),date1.getMonth(),date1.getDate()),
-          d2 = new Date(date2.getFullYear(),date2.getMonth(),date2.getDate());
-
-    if(d1 > d2){
-      return true;
-    }else{
-      return false;
-    }
   }
 }
 

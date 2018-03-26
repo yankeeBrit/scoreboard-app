@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Spinner } from 'spin.js';
 import axios from 'axios';
-import { TweenMax, Power2 } from "gsap";
-import GameScores from "./GameScores.js";
+import { TweenMax, Power2 } from 'gsap';
+import GameScores from './GameScores.js';
+import utils from './utilities.js';
 
 class Scoreboard extends Component {
   constructor(props) {
@@ -86,7 +87,7 @@ class Scoreboard extends Component {
 
   render() {
     const date = new Date(this.state.date),
-          eventsDate = this.getMonth(date) + ' ' + date.getDate() + ', ' + date.getFullYear();
+          eventsDate = utils.getMonth(date) + ' ' + date.getDate() + ', ' + date.getFullYear();
 
     return (
       <div className='scoreboard'>
@@ -104,23 +105,6 @@ class Scoreboard extends Component {
         <div className='scoreboard__next'><span className='fa fa-chevron-right'></span></div>
       </div>
     );
-  }
-
-  getMonth(date) {
-    const months = ['January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                    'August',
-                    'September',
-                    'October',
-                    'November',
-                    'December'];
-
-    return months[date.getMonth()];
   }
 }
 
